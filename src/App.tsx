@@ -25,10 +25,10 @@ function ProtectedRoute({ children }: { children: React.ReactNode }) {
     );
   }
   if (!user) return <Navigate to="/auth" replace />;
-  
+
   // Admin users go to admin panel
   if (role === 'admin') return <Navigate to="/admin" replace />;
-  
+
   return <>{children}</>;
 }
 
@@ -53,7 +53,8 @@ const App = () => (
     <TooltipProvider>
       <Toaster />
       <Sonner />
-      <BrowserRouter>
+      <BrowserRouter basename="/krishios">
+
         <AuthProvider>
           <Routes>
             <Route path="/auth" element={<AuthPage />} />
