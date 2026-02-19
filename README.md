@@ -1,84 +1,77 @@
-# Welcome to your Lovable project
+# KrishiOS - Smart Farming for Bangladesh 🌾
 
-## Project info
+KrishiOS is a comprehensive, decision-first farming operating system designed to empower Bangladeshi farmers with AI-driven insights, farm management tools, and real-time market data. Our mission is to bridge the digital divide in agriculture and provide farmers with the precision tools they need to optimize yields and maximize profits.
 
-**URL**: https://lovable.dev/projects/REPLACE_WITH_PROJECT_ID
+## 🚀 Key Features
 
-## How can I edit this code?
+- **🤖 AI Smart Advisory**: Instant AI-powered consultation for crop diseases, cultivation techniques, and pest management.
+- **📊 Production Tracking**: Comprehensive logs for crops, livestock, and fish farming to monitor growth and productivity.
+- **💰 Finance Management**: Track income and expenses specifically tailored for agricultural businesses.
+- **📈 Marketplace & Prices**: Real-time market prices across Bangladesh and a dedicated marketplace for farming equipment and products.
+- **📅 Smart Scheduler**: Never miss a watering, fertilization, or vaccination date with automated farm tasks.
+- **🌦️ Weather Engine**: Hyper-local weather forecasts with actionable farming advice based on conditions.
+- **🇧🇩 Multi-language Support**: Fully accessible in both **Bangla** and **English**.
 
-There are several ways of editing your application.
+## 🛠️ Tech Stack
 
-**Use Lovable**
+- **Frontend**: React 18, TypeScript, Vite
+- **Styling**: Tailwind CSS, shadcn/ui
+- **Backend / Database**: Supabase (PostgreSQL, Edge Functions)
+- **State Management**: TanStack Query (React Query)
+- **UI Components**: Lucide Icons, Recharts (for data visualization)
 
-Simply visit the [Lovable Project](https://lovable.dev/projects/REPLACE_WITH_PROJECT_ID) and start prompting.
+## 📦 Getting Started
 
-Changes made via Lovable will be committed automatically to this repo.
+### Prerequisites
 
-**Use your preferred IDE**
+- Node.js (v18 or higher)
+- npm or bun
 
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
+### Local Development
 
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
+1. **Clone the repository**
+   ```bash
+   git clone https://github.com/sohanfardin/krishios.git
+   cd krishios
+   ```
 
-Follow these steps:
+2. **Install dependencies**
+   ```bash
+   npm install
+   ```
 
-```sh
-# Step 1: Clone the repository using the project's Git URL.
-git clone <YOUR_GIT_URL>
+3. **Set up environment variables**
+   Create a `.env` file in the root directory and add your Supabase credentials:
+   ```env
+   VITE_SUPABASE_URL=your_supabase_url
+   VITE_SUPABASE_ANON_KEY=your_supabase_anon_key
+   ```
 
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
+4. **Start the development server**
+   ```bash
+   npm run dev
+   ```
 
-# Step 3: Install the necessary dependencies.
-npm i
+## 🚀 Deployment
 
-# Step 4: Start the development server with auto-reloading and an instant preview.
-npm run dev
-```
+This project is configured for automated deployment to **GitHub Pages** via GitHub Actions.
 
-**Edit a file directly in GitHub**
+1. **Push to Main**: Any push to the `main` branch triggers the deployment workflow.
+2. **Settings**: Ensure your repository settings under **Pages** are set to use **GitHub Actions** as the source.
+3. **URL**: Your site will be live at `https://sohanfardin.github.io/krishios/`
 
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
+## 📂 Project Structure
 
-**Use GitHub Codespaces**
+- `src/components`: Reusable UI components.
+- `src/pages`: Main application views (Dashboard, Finance, AI, etc.).
+- `src/hooks`: Custom React hooks for data fetching and logic.
+- `src/contexts`: React Context providers for global state (Auth, Language).
+- `supabase/functions`: Backend logic hosted as Supabase Edge Functions.
 
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
+## 📄 License
 
-## What technologies are used for this project?
+This project is licensed under the MIT License - see the LICENSE file for details.
 
-This project is built with:
+---
 
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
-
-## How can I deploy this project?
-
-### GitHub Pages (Recommended)
-
-This project is configured for easy deployment to GitHub Pages using GitHub Actions:
-
-1. Push your code to your GitHub repository.
-2. In your GitHub repository, go to **Settings > Pages**.
-3. Under **Build and deployment > Source**, select **GitHub Actions**.
-4. The site will automatically build and deploy whenever you push to the `main` branch.
-
-### Manual Deployment
-
-Simply open [Lovable](https://lovable.dev/projects/REPLACE_WITH_PROJECT_ID) and click on Share -> Publish.
-
-## Can I connect a custom domain to my Lovable project?
-
-Yes, you can!
-
-To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
-
-Read more here: [Setting up a custom domain](https://docs.lovable.dev/features/custom-domain#custom-domain)
+Built with ❤️ for the farmers of Bangladesh.
