@@ -1,0 +1,334 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Bengali:wght@400;500;600;700&display=swap');
+
+@layer base {
+  :root {
+    /* KrishiOS Design System - Agricultural Theme */
+    --background: 145 30% 98%;
+    --foreground: 145 40% 10%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 145 40% 10%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 145 40% 10%;
+
+    /* Primary - Fresh Green (Growth) */
+    --primary: 142 60% 40%;
+    --primary-foreground: 0 0% 100%;
+
+    /* Secondary - Earthy Terracotta */
+    --secondary: 25 70% 50%;
+    --secondary-foreground: 0 0% 100%;
+
+    /* Muted - Soft sage */
+    --muted: 145 20% 92%;
+    --muted-foreground: 145 20% 40%;
+
+    /* Accent - Golden Harvest */
+    --accent: 45 90% 55%;
+    --accent-foreground: 45 90% 15%;
+
+    /* Destructive - Alert Red */
+    --destructive: 0 72% 51%;
+    --destructive-foreground: 0 0% 100%;
+
+    /* Success - Healthy Green */
+    --success: 142 70% 45%;
+    --success-foreground: 0 0% 100%;
+
+    /* Warning - Amber */
+    --warning: 38 92% 50%;
+    --warning-foreground: 38 92% 10%;
+
+    /* Info - Sky Blue */
+    --info: 199 89% 48%;
+    --info-foreground: 0 0% 100%;
+
+    --border: 145 20% 85%;
+    --input: 145 20% 85%;
+    --ring: 142 60% 40%;
+
+    --radius: 0.75rem;
+
+    /* Custom gradients */
+    --gradient-primary: linear-gradient(135deg, hsl(142 60% 40%) 0%, hsl(142 70% 35%) 100%);
+    --gradient-secondary: linear-gradient(135deg, hsl(25 70% 50%) 0%, hsl(25 80% 45%) 100%);
+    --gradient-accent: linear-gradient(135deg, hsl(45 90% 55%) 0%, hsl(38 92% 50%) 100%);
+    --gradient-hero: linear-gradient(135deg, hsl(142 60% 40%) 0%, hsl(142 70% 30%) 50%, hsl(25 70% 45%) 100%);
+    --gradient-card: linear-gradient(180deg, hsl(0 0% 100%) 0%, hsl(145 30% 98%) 100%);
+    --gradient-sky: linear-gradient(180deg, hsl(199 89% 70%) 0%, hsl(199 89% 48%) 100%);
+
+    /* Shadows */
+    --shadow-sm: 0 2px 8px -2px hsl(145 40% 10% / 0.08);
+    --shadow-md: 0 4px 16px -4px hsl(145 40% 10% / 0.12);
+    --shadow-lg: 0 8px 32px -8px hsl(145 40% 10% / 0.16);
+    --shadow-glow: 0 0 24px hsl(142 60% 40% / 0.25);
+
+    /* Sidebar */
+    --sidebar-background: 142 50% 25%;
+    --sidebar-foreground: 0 0% 98%;
+    --sidebar-primary: 45 90% 55%;
+    --sidebar-primary-foreground: 45 90% 10%;
+    --sidebar-accent: 142 40% 30%;
+    --sidebar-accent-foreground: 0 0% 98%;
+    --sidebar-border: 142 40% 20%;
+    --sidebar-ring: 45 90% 55%;
+  }
+
+  .dark {
+    --background: 145 30% 8%;
+    --foreground: 145 20% 95%;
+
+    --card: 145 25% 12%;
+    --card-foreground: 145 20% 95%;
+
+    --popover: 145 25% 12%;
+    --popover-foreground: 145 20% 95%;
+
+    --primary: 142 60% 50%;
+    --primary-foreground: 142 60% 10%;
+
+    --secondary: 25 70% 55%;
+    --secondary-foreground: 0 0% 100%;
+
+    --muted: 145 20% 18%;
+    --muted-foreground: 145 15% 60%;
+
+    --accent: 45 90% 55%;
+    --accent-foreground: 45 90% 10%;
+
+    --destructive: 0 62% 45%;
+    --destructive-foreground: 0 0% 100%;
+
+    --success: 142 70% 50%;
+    --success-foreground: 0 0% 100%;
+
+    --warning: 38 92% 55%;
+    --warning-foreground: 38 92% 10%;
+
+    --info: 199 89% 55%;
+    --info-foreground: 0 0% 100%;
+
+    --border: 145 20% 20%;
+    --input: 145 20% 20%;
+    --ring: 142 60% 50%;
+
+    --sidebar-background: 145 30% 6%;
+    --sidebar-foreground: 145 20% 95%;
+    --sidebar-primary: 45 90% 55%;
+    --sidebar-primary-foreground: 45 90% 10%;
+    --sidebar-accent: 145 25% 15%;
+    --sidebar-accent-foreground: 145 20% 95%;
+    --sidebar-border: 145 20% 15%;
+    --sidebar-ring: 45 90% 55%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+    font-family: 'Noto Sans Bengali', system-ui, sans-serif;
+  }
+
+  /* Bangla typography optimization */
+  .font-bangla {
+    font-family: 'Noto Sans Bengali', system-ui, sans-serif;
+    line-height: 1.7;
+  }
+}
+
+@layer components {
+  /* Card with hover effects */
+  .card-interactive {
+    @apply transition-all duration-300 ease-out;
+    box-shadow: var(--shadow-sm);
+  }
+  
+  .card-interactive:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-md);
+  }
+
+  /* Gradient backgrounds */
+  .bg-gradient-primary {
+    background: var(--gradient-primary);
+  }
+
+  .bg-gradient-secondary {
+    background: var(--gradient-secondary);
+  }
+
+  .bg-gradient-accent {
+    background: var(--gradient-accent);
+  }
+
+  .bg-gradient-hero {
+    background: var(--gradient-hero);
+  }
+
+  .bg-gradient-card {
+    background: var(--gradient-card);
+  }
+
+  .bg-gradient-sky {
+    background: var(--gradient-sky);
+  }
+
+  /* Shadows */
+  .shadow-glow {
+    box-shadow: var(--shadow-glow);
+  }
+
+  /* Alert colors */
+  .alert-success {
+    @apply bg-success/10 border-success/30 text-success;
+  }
+
+  .alert-warning {
+    @apply bg-warning/10 border-warning/30 text-warning;
+  }
+
+  .alert-destructive {
+    @apply bg-destructive/10 border-destructive/30 text-destructive;
+  }
+
+  .alert-info {
+    @apply bg-info/10 border-info/30 text-info;
+  }
+
+  /* Icon containers */
+  .icon-container {
+    @apply flex items-center justify-center rounded-xl p-3;
+  }
+
+  .icon-container-sm {
+    @apply flex items-center justify-center rounded-lg p-2;
+  }
+
+  /* Stat cards */
+  .stat-card {
+    @apply rounded-2xl p-5 card-interactive bg-card;
+  }
+
+  /* Navigation active state */
+  .nav-active {
+    @apply bg-sidebar-accent text-sidebar-accent-foreground;
+  }
+
+  /* Mobile touch targets */
+  .touch-target {
+    @apply min-h-[48px] min-w-[48px];
+  }
+
+  /* Emoji display */
+  .emoji-lg {
+    @apply text-3xl leading-none;
+  }
+
+  .emoji-xl {
+    @apply text-4xl leading-none;
+  }
+}
+
+@layer utilities {
+  /* 3D card effect */
+  .card-3d {
+    transform-style: preserve-3d;
+    perspective: 1000px;
+  }
+
+  .card-3d:hover {
+    transform: rotateX(2deg) rotateY(-2deg);
+  }
+
+  /* Pulse animation for alerts */
+  .pulse-alert {
+    animation: pulse-alert 2s ease-in-out infinite;
+  }
+
+  @keyframes pulse-alert {
+    0%, 100% {
+      opacity: 1;
+    }
+    50% {
+      opacity: 0.7;
+    }
+  }
+
+  /* Fade in animation */
+  .animate-fade-in {
+    animation: fade-in 0.5s ease-out forwards;
+  }
+
+  @keyframes fade-in {
+    from {
+      opacity: 0;
+      transform: translateY(10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  /* Slide up animation */
+  .animate-slide-up {
+    animation: slide-up 0.4s ease-out forwards;
+  }
+
+  @keyframes slide-up {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  /* Scale in animation */
+  .animate-scale-in {
+    animation: scale-in 0.3s ease-out forwards;
+  }
+
+  @keyframes scale-in {
+    from {
+      opacity: 0;
+      transform: scale(0.95);
+    }
+    to {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+
+  /* Gradient text */
+  .text-gradient-primary {
+    @apply bg-clip-text text-transparent;
+    background-image: var(--gradient-primary);
+  }
+
+  .text-gradient-accent {
+    @apply bg-clip-text text-transparent;
+    background-image: var(--gradient-accent);
+  }
+}
+
+@layer utilities {
+  .scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
+}

@@ -1,0 +1,25 @@
+project_id = "uhqwcllbykkigucrukxb"
+
+[functions.ai-advisory]
+verify_jwt = false
+
+[functions.weather-engine]
+verify_jwt = false
+
+[functions.smart-advisory]
+verify_jwt = false
+
+[functions.production-analysis]
+verify_jwt = false
+
+[functions.image-diagnosis]
+verify_jwt = false
+
+[functions.payment-notification]
+verify_jwt = false
+
+[functions.email-otp]
+verify_jwt = false
+
+[functions.admin-delete-user]
+verify_jwt = false
