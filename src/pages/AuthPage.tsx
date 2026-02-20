@@ -20,6 +20,7 @@ export default function AuthPage() {
   const [resetSent, setResetSent] = useState(false);
   const [onboardingChecked, setOnboardingChecked] = useState(false);
   const [onboardingCompleted, setOnboardingCompleted] = useState(false);
+  const [justSignedUp, setJustSignedUp] = useState(false);
   const { toast } = useToast();
 
   // Check if logged-in user has completed onboarding
@@ -53,7 +54,7 @@ export default function AuthPage() {
   }
 
   // Only redirect if user exists AND onboarding is completed
-  if (user && onboardingCompleted) return <Navigate to="/" replace />;
+  if (user && onboardingCompleted) return <Navigate to={justSignedUp ? "/?new_signup=true" : "/"} replace />;
 
   const handleEmailLogin = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -85,7 +86,7 @@ export default function AuthPage() {
     <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-primary/10 via-background to-accent/10 p-4">
       {isSignUp ? (
         <div className="w-full">
-          <SignupWizard onOnboardingComplete={() => setOnboardingCompleted(true)} onBackToLogin={() => setIsSignUp(false)} />
+          <SignupWizard onOnboardingComplete={() => { setOnboardingCompleted(true); setJustSignedUp(true); }} onBackToLogin={() => setIsSignUp(false)} />
           <div className="text-center mt-4">
             {!user && (
               <button type="button" onClick={() => setIsSignUp(false)} className="text-sm text-primary hover:underline">
@@ -158,13 +159,13 @@ export default function AuthPage() {
                       পাসওয়ার্ড ভুলে গেছেন?
                     </button>
                   </div>
-                   <div className="relative">
-                     <Lock className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
-                     <Input id="password" type={showPassword ? 'text' : 'password'} placeholder="••••••••" value={password} onChange={e => setPassword(e.target.value)} className="pl-10 pr-10" required minLength={6} />
-                     <button type="button" onClick={() => setShowPassword(!showPassword)} className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground">
-                       {showPassword ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
-                     </button>
-                   </div>
+                  <div className="relative">
+                    <Lock className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
+                    <Input id="password" type={showPassword ? 'text' : 'password'} placeholder="••••••••" value={password} onChange={e => setPassword(e.target.value)} className="pl-10 pr-10" required minLength={6} />
+                    <button type="button" onClick={() => setShowPassword(!showPassword)} className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground">
+                      {showPassword ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
+                    </button>
+                  </div>
                 </div>
                 <Button type="submit" className="w-full" disabled={loading}>
                   {loading && <Loader2 className="w-4 h-4 mr-2 animate-spin" />}

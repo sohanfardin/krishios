@@ -29,13 +29,19 @@ function AppContent() {
   const [autoCreating, setAutoCreating] = useState(false);
   const [showTutorial, setShowTutorial] = useState(false);
 
-  // Show tutorial for new users (check localStorage)
+  // Show tutorial only for new signup users (check URL param)
   useEffect(() => {
     if (!user) return;
-    const key = `tutorial_seen_${user.id}`;
-    if (!localStorage.getItem(key)) {
+    const urlParams = new URLSearchParams(window.location.search);
+    const isNewSignup = urlParams.get('new_signup') === 'true';
+
+    if (isNewSignup) {
       // Delay slightly so dashboard loads first
-      const timer = setTimeout(() => setShowTutorial(true), 1500);
+      const timer = setTimeout(() => {
+        setShowTutorial(true);
+        // Clean up URL so it doesn't show again on refresh
+        window.history.replaceState({}, '', window.location.pathname);
+      }, 1500);
       return () => clearTimeout(timer);
     }
   }, [user]);
@@ -50,7 +56,7 @@ function AppContent() {
   // Auto-create farm from profile data if none exists
   useEffect(() => {
     if (isLoading || farm || autoCreating || !user) return;
-    
+
     const autoCreateFarm = async () => {
       setAutoCreating(true);
       try {
@@ -61,8 +67,8 @@ function AppContent() {
           .maybeSingle();
 
         const farmType = profile?.farmer_type?.[0] || 'mixed';
-        const farmName = profile?.full_name 
-          ? `${profile.full_name}-এর খামার` 
+        const farmName = profile?.full_name
+          ? `${profile.full_name}-এর খামার`
           : 'আমার খামার';
 
         await createFarm.mutateAsync({
