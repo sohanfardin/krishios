@@ -73,7 +73,7 @@ export function SignupWizard({ onOnboardingComplete, onBackToLogin }: SignupWiza
   const fileInputRef = useRef<HTMLInputElement>(null);
   const [avatarPreview, setAvatarPreview] = useState<string | null>(null);
   const [avatarFile, setAvatarFile] = useState<File | null>(null);
-  const [showEmailConfirmation, setShowEmailConfirmation] = useState(false);
+
 
   // Step 1: Account Info
   const [fullName, setFullName] = useState('');
@@ -213,22 +213,7 @@ export function SignupWizard({ onOnboardingComplete, onBackToLogin }: SignupWiza
         }
       }
 
-      // Send magic sign-in link
-      await supabase.auth.signInWithOtp({
-        email: email.trim(),
-        options: {
-          emailRedirectTo: window.location.origin,
-        },
-      });
-
-      // Sign out current session so user must confirm via email
-      await signOut();
-
-      toast({
-        title: '✅ সব তথ্য সংরক্ষণ হয়েছে!',
-        description: 'আপনার ইমেইলে একটি সাইন-ইন লিংক পাঠানো হয়েছে।',
-      });
-      setShowEmailConfirmation(true);
+      onOnboardingComplete?.();
     } catch {
       toast({ title: 'ত্রুটি', description: 'তথ্য সংরক্ষণে সমস্যা হয়েছে', variant: 'destructive' });
     }
@@ -245,42 +230,6 @@ export function SignupWizard({ onOnboardingComplete, onBackToLogin }: SignupWiza
     }
   };
 
-  if (showEmailConfirmation) {
-    return (
-      <div className="w-full max-w-lg mx-auto">
-        <div className="bg-card rounded-2xl p-6 shadow-sm border border-border text-center space-y-5">
-          <div className="w-20 h-20 rounded-full bg-primary/10 flex items-center justify-center mx-auto">
-            <Mail className="w-10 h-10 text-primary" />
-          </div>
-          <h2 className="text-xl font-bold text-foreground">ইমেইল নিশ্চিত করুন</h2>
-          <p className="text-muted-foreground text-sm">
-            <span className="font-semibold text-foreground">{email.trim()}</span> ঠিকানায় একটি সাইন-ইন লিংক পাঠানো হয়েছে।
-          </p>
-          <div className="bg-accent/20 rounded-xl p-4 space-y-2">
-            <p className="text-sm font-medium text-foreground">📩 পরবর্তী ধাপ:</p>
-            <ol className="text-sm text-muted-foreground text-left space-y-1 list-decimal list-inside">
-              <li>আপনার ইমেইল ইনবক্স খুলুন</li>
-              <li>"Sign in to KrishiOS" ইমেইলটি খুঁজুন</li>
-              <li>ইমেইলের ভিতরে থাকা লিংকে ক্লিক করুন</li>
-              <li>স্বয়ংক্রিয়ভাবে লগইন হয়ে যাবেন!</li>
-            </ol>
-          </div>
-          <p className="text-xs text-muted-foreground">ইমেইল না পেলে স্প্যাম/জাংক ফোল্ডার চেক করুন</p>
-          <Button
-            variant="outline"
-            onClick={() => {
-              setShowEmailConfirmation(false);
-              onBackToLogin?.();
-            }}
-            className="w-full"
-          >
-            <ArrowLeft className="w-4 h-4 mr-2" />
-            লগইন পেজে ফিরে যান
-          </Button>
-        </div>
-      </div>
-    );
-  }
 
   return (
     <div className="w-full max-w-lg mx-auto">
@@ -432,11 +381,10 @@ export function SignupWizard({ onOnboardingComplete, onBackToLogin }: SignupWiza
                   key={ft.value}
                   type="button"
                   onClick={() => toggleArrayItem(farmerTypes, setFarmerTypes, ft.value)}
-                  className={`p-4 rounded-xl border-2 text-left transition-all ${
-                    farmerTypes.includes(ft.value)
+                  className={`p-4 rounded-xl border-2 text-left transition-all ${farmerTypes.includes(ft.value)
                       ? 'border-primary bg-primary/10 shadow-sm'
                       : 'border-border hover:border-primary/50'
-                  }`}
+                    }`}
                 >
                   <span className="text-xl block mb-1">{ft.label.split(' ')[0]}</span>
                   <span className="text-sm font-medium">{ft.label.split(' ').slice(1).join(' ')}</span>
@@ -457,11 +405,10 @@ export function SignupWizard({ onOnboardingComplete, onBackToLogin }: SignupWiza
                     key={ls.value}
                     type="button"
                     onClick={() => setLandSize(ls.value)}
-                    className={`p-3 rounded-xl border-2 text-left text-sm transition-all ${
-                      landSize === ls.value
+                    className={`p-3 rounded-xl border-2 text-left text-sm transition-all ${landSize === ls.value
                         ? 'border-primary bg-primary/10'
                         : 'border-border hover:border-primary/50'
-                    }`}
+                      }`}
                   >
                     {ls.label}
                   </button>
@@ -476,11 +423,10 @@ export function SignupWizard({ onOnboardingComplete, onBackToLogin }: SignupWiza
                     key={lo.value}
                     type="button"
                     onClick={() => setLandOwnership(lo.value)}
-                    className={`p-3 rounded-xl border-2 text-center text-sm transition-all ${
-                      landOwnership === lo.value
+                    className={`p-3 rounded-xl border-2 text-center text-sm transition-all ${landOwnership === lo.value
                         ? 'border-primary bg-primary/10'
                         : 'border-border hover:border-primary/50'
-                    }`}
+                      }`}
                   >
                     {lo.label}
                   </button>
@@ -495,11 +441,10 @@ export function SignupWizard({ onOnboardingComplete, onBackToLogin }: SignupWiza
                     key={is_.value}
                     type="button"
                     onClick={() => setIrrigationSource(is_.value)}
-                    className={`p-3 rounded-xl border-2 text-center text-sm transition-all ${
-                      irrigationSource === is_.value
+                    className={`p-3 rounded-xl border-2 text-center text-sm transition-all ${irrigationSource === is_.value
                         ? 'border-primary bg-primary/10'
                         : 'border-border hover:border-primary/50'
-                    }`}
+                      }`}
                   >
                     {is_.label}
                   </button>
@@ -519,11 +464,10 @@ export function SignupWizard({ onOnboardingComplete, onBackToLogin }: SignupWiza
                   key={fm.value}
                   type="button"
                   onClick={() => setFarmingMethod(fm.value)}
-                  className={`p-4 rounded-xl border-2 text-left transition-all ${
-                    farmingMethod === fm.value
+                  className={`p-4 rounded-xl border-2 text-left transition-all ${farmingMethod === fm.value
                       ? 'border-primary bg-primary/10 shadow-sm'
                       : 'border-border hover:border-primary/50'
-                  }`}
+                    }`}
                 >
                   <span className="text-lg font-medium">{fm.label}</span>
                 </button>
@@ -542,11 +486,10 @@ export function SignupWizard({ onOnboardingComplete, onBackToLogin }: SignupWiza
                   key={ch.value}
                   type="button"
                   onClick={() => toggleArrayItem(challenges, setChallenges, ch.value)}
-                  className={`p-3 rounded-xl border-2 text-left text-sm transition-all ${
-                    challenges.includes(ch.value)
+                  className={`p-3 rounded-xl border-2 text-left text-sm transition-all ${challenges.includes(ch.value)
                       ? 'border-primary bg-primary/10 shadow-sm'
                       : 'border-border hover:border-primary/50'
-                  }`}
+                    }`}
                 >
                   {ch.label}
                 </button>
